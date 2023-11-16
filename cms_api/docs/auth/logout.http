@@ -1,0 +1,5 @@
+# @name logout
+GET http://127.0.0.1:8000/api/auth/logout
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTY1NjY3NjgsImV4cCI6MTY5NjU3MDM2OCwibmJmIjoxNjk2NTY2NzY4LCJqdGkiOiJEdDczQXhnOXFlalVDY25rIiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.QKA01-MqCkQSR2-achl2WP9TNVvOrUIO0SSN4-eF-4I

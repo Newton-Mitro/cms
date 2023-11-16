@@ -1,0 +1,6 @@
+# @name getPostsByType
+
+GET http://127.0.0.1:8000/api/our-services/public
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer

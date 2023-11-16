@@ -1,0 +1,4 @@
+# @name healthCheck
+GET http://127.0.0.1:8000/_ignition/health-check
+Content-Type: application/json
+Accept: application/json

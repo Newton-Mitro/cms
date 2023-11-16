@@ -1,0 +1,6 @@
+# @name getPosts
+
+GET http://127.0.0.1:8000/api/posts?page=1&per_page=12&post_type=News
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer

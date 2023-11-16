@@ -1,0 +1,6 @@
+# @name getBoardMembers
+
+GET http://127.0.0.1:8000/api/staffs/staff-type/Credit Committee?page=1&per_page=2
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}

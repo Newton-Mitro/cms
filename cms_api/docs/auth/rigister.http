@@ -1,0 +1,11 @@
+# @name register
+POST http://127.0.0.1:8000/api/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Newton Mitro",
+    "phone": "01704687376",
+    "email": "newtonmitro@gmail.com",
+    "password": "password"
+}

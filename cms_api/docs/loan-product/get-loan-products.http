@@ -1,0 +1,7 @@
+# @name getLoanProducts
+
+GET http://127.0.0.1:8000/api/posts/post-type/Loan Product?page=1&per_page=2
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer
+

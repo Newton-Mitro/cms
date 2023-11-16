@@ -1,0 +1,5 @@
+# @name refreshToken
+GET http://127.0.0.1:8000/api/auth/refresh
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTY1NjYyMjYsImV4cCI6MTY5NjU2OTgyNiwibmJmIjoxNjk2NTY2MjI2LCJqdGkiOiJESlFrN1o5c3FleWU2YzVRIiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.8A6ddTLy5StxbkqKQP8YhGppoEr1NIpz3AHPi82KLcY

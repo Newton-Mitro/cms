@@ -1,0 +1,29 @@
+### Login Request
+# @name login
+
+POST http://127.0.0.1:8000/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+## Request Body
+{
+    "email": "super.admin@email.com",
+    "password": "password"
+}
+
+### Set Token
+@token = {{login.response.body.data.access_token}}
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# @name updateUser
+PUT  http://127.0.0.1:8000/api/users/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name":"John Doe",
+    "email":"super.admin@email.com",
+    "phone":"01700000000",
+    "role" : "Super Admin"
+}

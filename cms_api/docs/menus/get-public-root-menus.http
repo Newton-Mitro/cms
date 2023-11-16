@@ -1,0 +1,5 @@
+# @name getPublicRootMenus
+GET http://127.0.0.1:8000/api/root/public-menus
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer

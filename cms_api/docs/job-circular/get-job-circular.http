@@ -1,0 +1,6 @@
+# @name getJobCircular
+
+GET http://127.0.0.1:8000/api/job-circulars/post-slug/Insurance%20Sales%20Agent
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer

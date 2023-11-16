@@ -1,0 +1,27 @@
+### Login Request
+# @name login
+POST http://127.0.0.1:8000/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+## Request Body
+{
+    "email": "super.admin@email.com",
+    "password": "password"
+}
+
+### Set Token
+@token = {{login.response.body.data.access_token}}
+
+
+### Login Request
+PATCH  http://127.0.0.1:8000/api/users/updateUserActiveStatus/74
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+## Request Body
+{
+    "publishStatus": false
+
+}
