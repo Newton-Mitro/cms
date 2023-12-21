@@ -1,14 +1,10 @@
-import {
-  IconButton,
-  Input,
-  Tooltip,
-  Typography,
-} from '@material-tailwind/react';
+import { IconButton, Tooltip, Typography } from '@material-tailwind/react';
 import originalLogo from 'assets/brand/logo_original.png';
 import { motion } from 'framer-motion';
 import React, { useContext, useEffect, useState } from 'react';
 import { MyVariants } from 'shared/animations/animate/MyVariants';
 import Loading from 'shared/components/Loading';
+import MySearchInput from 'shared/components/MySearchInput';
 import MyPagination from 'shared/components/data_table/MyPagination';
 import MyModal from 'shared/components/my_modal/MyModal';
 import AuthUserContext, {
@@ -486,14 +482,10 @@ const PageIndexView: React.FC = () => {
                   searchClickHandler(event);
                 }}
               >
-                <Input
+                <MySearchInput
                   label="Search"
                   inputRef={searchInputRef}
-                  icon={
-                    <button type="submit">
-                      <i className="fa-solid fa-magnifying-glass hover:cursor-pointer hover:text-primary"></i>
-                    </button>
-                  }
+                  name={''}
                 />
               </form>
             </div>

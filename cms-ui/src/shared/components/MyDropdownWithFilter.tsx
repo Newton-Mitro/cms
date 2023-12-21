@@ -69,7 +69,7 @@ const MyDropdownWithFilter: React.FC<MyDropdownWithFilterProps> = ({
             name={name}
             onChange={(e) => setInputValue(e.target.value.toLowerCase())}
             placeholder="Search"
-            className="peer w-full rounded border-slate-300 bg-surface outline-slate-300 transition-colors focus:border-primary"
+            className="border-slate-300 outline-slate-300 peer w-full rounded bg-surface transition-colors focus:border-primary"
           />
         </div>
 

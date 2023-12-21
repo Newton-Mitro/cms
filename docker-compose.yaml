@@ -1,41 +1,43 @@
-version: "3"
+version: "3.8"
 services:
-  mysql:
-    platform: linux/x86_64
-    image: mysql:8.0
-    container_name: mysql
-    restart: unless-stopped
-    tty: true
-    environment:
-      MYSQL_DATABASE: "${DB_DATABASE}"
-      MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_ROOT: "root"
-      MYSQL_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-    volumes:
-      - mysql:/var/lib/mysql
-    ports:
-      - 3306:3306
-    networks:
-      - cms_network
+  # mysql:
+  #   platform: linux/x86_64
+  #   image: mysql:8.0
+  #   container_name: mysql
+  #   restart: unless-stopped
+  #   tty: true
+  #   environment:
+  #     MYSQL_DATABASE: "${DB_DATABASE}"
+  #     MYSQL_USER: "${DB_USERNAME}"
+  #     MYSQL_ROOT: "root"
+  #     MYSQL_PASSWORD: "${DB_PASSWORD}"
+  #     MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+  #   volumes:
+  #     - mysql:/var/lib/mysql
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - cms_network
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: PhpMyAdmin
-    links:
-      - mysql
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: unless-stopped
-    ports:
-      - 8081:80
-    networks:
-      - cms_network
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: PhpMyAdmin
+  #   links:
+  #     - mysql
+  #   environment:
+  #     PMA_HOST: mysql
+  #     PMA_PORT: 3306
+  #     PMA_ARBITRARY: 1
+  #   restart: unless-stopped
+  #   ports:
+  #     - 8081:80
+  #   networks:
+  #     - cms_network
 
   cmsui:
-    build: ./cms-ui/
+    build:
+      context: ./cms-ui
+      dockerfile: Dockerfile
     container_name: cmsui_container
     ports:
       - "3000:3000"
@@ -47,30 +49,35 @@ services:
       - cms_network
 
   cmsapi:
-    build: ./cms-api/
+    build:
+      context: ./cms-api
+      dockerfile: Dockerfile
     container_name: cmsapi_container
-    env_file:
-      - ./cms-api/.env
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    environment:
+      - APACHE_RUN_USER=#1000
+      - APACHE_RUN_GROUP=#1000
     ports:
       - "8000:8000"
     volumes:
-      - "./cms-api:/app"
-      - "./cms-api/node_modules"
+      - "./cms-api:/var/www/cms-api"
     networks:
       - cms_network
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
 
-  queue:
-    container_name: Queue
-    build: ./cms-api/
-    command: "php artisan queue:work"
-    depends_on:
-      - mysql
-
+  # queue:
+  #   container_name: Queue
+  #   build: ./cms-api/
+  #   command: "php artisan queue:work"
+  #   depends_on:
+  #     - mysql
 networks:
   cms_network:
     driver: bridge
     name: cms_network
-
-volumes:
-  mysql:
-    driver: local
+# volumes:
+#   mysql:
+#     driver: local

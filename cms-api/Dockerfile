@@ -5,12 +5,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# 2. Apache configs + document root.
-RUN echo "ServerName laravel-app.local" >> /etc/apache2/apache2.conf
+# # 2. Apache configs + document root.
+# RUN echo "ServerName laravel-app.local" >> /etc/apache2/apache2.conf
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/cms-api/public
-RUN sed -ri -e 's!/var/www/cms-api!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# ENV APACHE_DOCUMENT_ROOT=/var/www/cms-api/public
+# RUN sed -ri -e 's!/var/www/cms-api!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+# RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
 RUN a2enmod rewrite headers
@@ -19,8 +19,15 @@ RUN a2enmod rewrite headers
 # RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 WORKDIR /var/www/cms-api
+COPY 000-default.conf /etc/apache2/sites-available/
 COPY . .
 RUN composer install
+
+RUN php artisan storage:link
+RUN chown -R $USER:www-data storage
+RUN chmod -R 777 storage
+RUN php artisan cache:clear
+RUN composer dump-autoload
 
 EXPOSE 8000
 CMD php artisan serve --host=0.0.0.0 --port=8000
